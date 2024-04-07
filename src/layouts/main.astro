@@ -6,7 +6,8 @@ import Footer from "../components/Footer.astro";
 
 const title = "Francisco - Software Developer";
 const description =
-  "Francisco is a Software Developer with 3+ (three) years of experience, specializing in crafting mobile apps for Android and iOS using React Native. He values open communication, transparency, and sharing knowledge.";
+  "Francisco is a Software Developer with 3+ years of experience, specializing in crafting mobile apps for Android and iOS using React Native. He values open communication, transparency, and sharing knowledge.";
+const imageURL = "https://fmendes.dev/images/profile.webp";
 ---
 
 <html lang="en">
@@ -20,7 +21,7 @@ const description =
         basic: {
           title,
           type: "website",
-          image: "https://fmendes.dev/images/profile.webp",
+          image: imageURL,
           url: "https://fmendes.dev/",
         },
       }}
@@ -29,7 +30,7 @@ const description =
         meta: [
           {
             name: "twitter:image",
-            content: "https://fmendes.dev/images/profile.webp",
+            content: imageURL,
           },
           { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
@@ -56,7 +57,7 @@ const description =
     />
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body class="bg-slate-950 text-white scroll-smooth relative">
+  <body class="bg-slate-950 text-white select-none scroll-smooth relative">
     <div
       class="h-1 w-screen fixed top-0 left-0 bg-gradient-to-r from-teal-200 to-lime-200"
     >
