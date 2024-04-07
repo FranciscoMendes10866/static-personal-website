@@ -1,0 +1,62 @@
+---
+// import { WifiOff } from "lucide-astro";
+
+import Main from "../layouts/main.astro";
+import AboutMe from "../components/AboutMe.astro";
+import PersonalValues from "../components/PersonalValues.astro";
+---
+
+<Main>
+  <div id="mouse-glowing-blob"></div>
+
+  <div class="divide-y divide-dashed divide-slate-700">
+    <AboutMe />
+    <PersonalValues />
+  </div>
+</Main>
+
+<style>
+  @keyframes rotate {
+    from {
+      rotate: 0deg;
+    }
+    50% {
+      scale: 1 1.25;
+    }
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  #mouse-glowing-blob {
+    background-color: white;
+    height: 700px;
+    aspect-ratio: 1;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: linear-gradient(to right, #00c6fb, #005bea);
+    animation: rotate 20s infinite;
+    filter: blur(150px);
+    opacity: 15%;
+  }
+</style>
+
+<script>
+  const blob = document.querySelector(
+    "#mouse-glowing-blob"
+  ) as HTMLDivElement | null;
+
+  document.body.onpointermove = ({ clientX, clientY }: PointerEvent) => {
+    if (!blob) return;
+    blob.animate(
+      {
+        left: `${clientX}px`,
+        top: `${clientY}px`,
+      },
+      { duration: 1_500, fill: "forwards" }
+    );
+  };
+</script>

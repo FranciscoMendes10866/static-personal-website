@@ -1,0 +1,43 @@
+---
+import { AstroFont } from "astro-font";
+
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Home</title>
+    <AstroFont
+      config={[
+        {
+          name: "Lexend",
+          src: [
+            {
+              style: "normal",
+              weight: "300",
+              path: "./public/fonts/Lexend.ttf",
+            },
+          ],
+          preload: false,
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+        },
+      ]}
+    />
+  </head>
+  <body class="bg-slate-950 text-white select-none scroll-smooth relative">
+    <div
+      class="h-1 w-screen fixed top-0 left-0 bg-gradient-to-r from-teal-200 to-lime-200"
+    >
+    </div>
+    <main class="mx-10 max-w-screen-sm z-20">
+      <slot />
+      <Footer />
+    </main>
+  </body>
+</html>
