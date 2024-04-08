@@ -47,13 +47,16 @@ import PersonalValues from "../components/PersonalValues.astro";
     "#mouse-glowing-blob"
   ) as HTMLDivElement | null;
 
-  document.body.onpointermove = ({ clientX, clientY }: PointerEvent) => {
+  const viewportHeight = window.innerHeight;
+
+  document.body.onpointermove = (evt: PointerEvent) => {
     if (!blob) return;
+
+    const { clientX, clientY } = evt;
+    const height = Math.min(viewportHeight, clientY);
+
     blob.animate(
-      {
-        left: `${clientX}px`,
-        top: `${clientY}px`,
-      },
+      { left: `${clientX}px`, top: `${height}px` },
       { duration: 1_500, fill: "forwards" }
     );
   };
