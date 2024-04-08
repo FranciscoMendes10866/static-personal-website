@@ -66,76 +66,10 @@ const imageURL = "https://fmendes.dev/images/profile.webp";
     >
     </div>
 
-    <!-- glowing blob -->
-    <div
-      class="overflow-hidden absolute top-0 left-0"
-      id="glowing-blob-wrapper"
-    >
-      <div id="mouse-glowing-blob"></div>
-    </div>
-
     <!-- page content -->
     <main class="mx-10 max-w-screen-sm z-20">
       <slot />
       <Footer />
     </main>
-
-    <!-- styles and scrips -->
-    <style>
-      @keyframes rotate {
-        from {
-          rotate: 0deg;
-        }
-        50% {
-          scale: 1 1.25;
-        }
-        to {
-          rotate: 360deg;
-        }
-      }
-
-      #mouse-glowing-blob {
-        background-color: white;
-        height: 600px;
-        aspect-ratio: 1;
-        position: absolute;
-        left: 50%;
-        right: 50%;
-        translate: -50% -50%;
-        border-radius: 50%;
-        background: linear-gradient(to right, #00c6fb, #005bea);
-        animation: rotate 20s infinite;
-        filter: blur(200px);
-        opacity: 25%;
-      }
-    </style>
-
-    <script>
-      const wrapperElement = document.querySelector(
-        "#glowing-blob-wrapper"
-      ) as HTMLDivElement | null;
-
-      if (wrapperElement) {
-        const observer = new ResizeObserver((entries) => {
-          const scrollHeight = entries.at(0)?.target?.scrollHeight ?? 0;
-          const clientWidth = window.innerWidth;
-
-          wrapperElement.style.height = `${scrollHeight}px`;
-          wrapperElement.style.width = `${clientWidth}px`;
-        });
-
-        observer.observe(document.documentElement);
-      }
-
-      const blobElement = document.querySelector("#mouse-glowing-blob");
-
-      document.body.onpointermove = ({ clientX, clientY }: PointerEvent) => {
-        if (!blobElement) return;
-        blobElement.animate(
-          { left: `${clientX}px`, top: `${clientY}px` },
-          { duration: 1_500, fill: "forwards" }
-        );
-      };
-    </script>
   </body>
 </html>
