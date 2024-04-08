@@ -1,20 +1,36 @@
 ---
-import { Github } from "lucide-astro";
+import { Github, Linkedin } from "lucide-astro";
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="my-10 text-slate-700">
-  <div class="flex flex-row items-center justify-between">
-    <p class="text-sm font-light leading-loose tracking-widest truncate">
-      All rights reserved © Francisco Mendes {currentYear}
-    </p>
-    <a
-      class="z-10 h-6 w-6 flex items-center justify-center hover:text-slate-50"
-      href="https://github.com/FranciscoMendes10866"
-      target="_blank"
+<footer class="py-10 text-slate-700">
+  <div class="flex flex-row items-start sm:items-center justify-between">
+    <p
+      class="text-sm font-light leading-relaxed tracking-widest truncate flex flex-col sm:flex-row items-start sm:items-start justify-start gap-0 sm:gap-1"
     >
-      <Github class="h-4 w-4" />
-    </a>
+      <span>All rights reserved ©</span><span
+        >Francisco Mendes {currentYear}</span
+      >
+    </p>
+
+    <div class="flex items-center justify-center gap-2 z-10">
+      <a
+        class="h-6 w-6 flex items-center justify-center hover:text-slate-50"
+        href="https://github.com/FranciscoMendes10866"
+        target="_blank"
+        aria-label="francisco mendes github profile link"
+      >
+        <Github class="h-4 w-4" />
+      </a>
+      <a
+        class="h-6 w-6 flex items-center justify-center hover:text-slate-50"
+        href="https://www.linkedin.com/in/fmendesdev"
+        target="_blank"
+        aria-label="francisco mendes linkedin profile link"
+      >
+        <Linkedin class="h-4 w-4" />
+      </a>
+    </div>
   </div>
 </footer>
