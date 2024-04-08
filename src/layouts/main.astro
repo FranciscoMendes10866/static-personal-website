@@ -57,14 +57,84 @@ const imageURL = "https://fmendes.dev/images/profile.webp";
     />
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body class="bg-slate-950 text-white select-none scroll-smooth relative overflow-y-scroll">
+  <body
+    class="bg-slate-950 text-white select-none scroll-smooth relative overflow-x-hidden overflow-y-auto h-screen w-screen"
+  >
+    <!-- fixed gradient line -->
     <div
       class="h-1 w-screen fixed top-0 left-0 bg-gradient-to-r from-teal-200 to-lime-200"
     >
     </div>
+
+    <!-- glowing blob -->
+    <div
+      class="overflow-hidden absolute top-0 left-0"
+      id="glowing-blob-wrapper"
+    >
+      <div id="mouse-glowing-blob"></div>
+    </div>
+
+    <!-- page content -->
     <main class="mx-10 max-w-screen-sm z-20">
       <slot />
       <Footer />
     </main>
+
+    <!-- styles and scrips -->
+    <style>
+      @keyframes rotate {
+        from {
+          rotate: 0deg;
+        }
+        50% {
+          scale: 1 1.25;
+        }
+        to {
+          rotate: 360deg;
+        }
+      }
+
+      #mouse-glowing-blob {
+        background-color: white;
+        height: 600px;
+        aspect-ratio: 1;
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        translate: -50% -50%;
+        border-radius: 50%;
+        background: linear-gradient(to right, #00c6fb, #005bea);
+        animation: rotate 20s infinite;
+        filter: blur(150px);
+        opacity: 15%;
+      }
+    </style>
+
+    <script>
+      const wrapper = document.querySelector("#glowing-blob-wrapper");
+      if (wrapper) {
+        const observer = new ResizeObserver((entries) => {
+          const scrollHeight = entries.at(0)?.target?.scrollHeight ?? 0;
+          const clientWidth = entries.at(0)?.target?.clientWidth ?? 0;
+
+          (wrapper as HTMLDivElement).style.height = `${scrollHeight}px`;
+          (wrapper as HTMLDivElement).style.width = `${clientWidth}px`;
+        });
+
+        observer.observe(document.documentElement);
+      }
+
+      const blob = document.querySelector(
+        "#mouse-glowing-blob"
+      ) as HTMLDivElement | null;
+
+      document.body.onpointermove = ({ clientX, clientY }: PointerEvent) => {
+        if (!blob) return;
+        blob.animate(
+          { left: `${clientX}px`, top: `${clientY}px` },
+          { duration: 1_500, fill: "forwards" }
+        );
+      };
+    </script>
   </body>
 </html>
